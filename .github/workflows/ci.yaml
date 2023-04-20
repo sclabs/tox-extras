@@ -19,8 +19,6 @@ jobs:
         - linux: type
           pytest: false
         - linux: test
-      cache-path: .tox/
-      cache-key: tox-${{ hashFiles('pyproject.toml') }}
       coverage: codecov
   publish:
     needs: [test]
