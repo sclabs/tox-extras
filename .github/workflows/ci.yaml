@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    uses: OpenAstronomy/github-actions-workflows/.github/workflows/tox.yml@v1
+    with:
+      envs: |
+        - linux: lint
+          pytest: false
+        - linux: type
+          pytest: false
+        - linux: test
+      cache-path: .tox/
+      cache-key: tox-${{ hashFiles('pyproject.toml') }}
+      coverage: codecov
+  publish:
+    needs: [test]
+    uses: OpenAstronomy/github-actions-workflows/.github/workflows/publish_pure_python.yml@v1
+    secrets:
+      pypi_token: ${{ secrets.PYPI_TOKEN }}

@@ -1,0 +1,44 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [
+    "setuptools>=45",
+    "setuptools_scm[toml]>=6.2",
+]
+
+[project]
+name = "tox-extras"
+description = "A tox plugin to install extras directly into a testenv"
+authors = [{ name = "Thomas Gilgenast", email = "thomasgilgenast@gmail.com" }]
+urls = { repository = "https://github.com/sclabs/tox-extras" }
+readme = "README.md"
+dynamic = ["version"]
+requires-python = ">=3.7"
+dependencies = [
+    "tomli",
+    "tox>=4",
+]
+
+[project.optional-dependencies]
+lint = [
+    "black==23.3.0",
+    "ruff==0.0.262",
+]
+type = [
+    "mypy==1.2.0",
+]
+test = [
+    "pytest==7.3.1",
+    "tox==4.4.12",
+]
+dev = [
+    "tox-extras[lint,type,test]",
+]
+
+[project.entry-points.tox]
+extras = "tox_extras"
+
+[tool.setuptools_scm]
+root = "."
+
+[tool.ruff]
+select = ["E", "F", "W", "I"]

@@ -1,0 +1,10 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools>=45"]
+
+[project]
+name = "example"
+version = "0.0.0"
+
+[project.optional-dependencies]
+lint = ["black==23.3.0"]
