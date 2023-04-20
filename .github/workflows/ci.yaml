@@ -19,7 +19,6 @@ jobs:
         - linux: type
           pytest: false
         - linux: test
-      coverage: codecov
   publish:
     needs: [test]
     uses: OpenAstronomy/github-actions-workflows/.github/workflows/publish_pure_python.yml@v1
